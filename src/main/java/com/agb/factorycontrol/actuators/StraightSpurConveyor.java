@@ -1,6 +1,7 @@
 package com.agb.factorycontrol.actuators;
 
 import com.agb.factorycontrol.actuators.core.Actuator;
+import com.agb.factorycontrol.management.SyncGroup;
 
 /**
  * Infeed/outfeed multi-belt conveyor, commonly used for an accurate merging of loads into belt 
@@ -8,15 +9,16 @@ import com.agb.factorycontrol.actuators.core.Actuator;
  * 
  */
 public class StraightSpurConveyor {
-    private final Actuator<Float> actuator;
+    private final Actuator<Float> mStraightSpurConveyorActuator;
     
-    public StraightSpurConveyor(String name, Float value) {
-        actuator = new Actuator(name, value);
+    public StraightSpurConveyor(String name, Float value, SyncGroup syncGroup) {
+        mStraightSpurConveyorActuator = new Actuator(name, value);
+        syncGroup.add(mStraightSpurConveyorActuator);
     }
     public void setSpeed(float speed) {
-        actuator.setValue(speed);
+        mStraightSpurConveyorActuator.setValue(speed);
     }
     public float getSpeed() {
-        return actuator.getValue();
+        return mStraightSpurConveyorActuator.getValue();
     }  
 }

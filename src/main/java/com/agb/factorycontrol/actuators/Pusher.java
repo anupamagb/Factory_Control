@@ -1,6 +1,7 @@
 package com.agb.factorycontrol.actuators;
 
 import com.agb.factorycontrol.actuators.core.Actuator;
+import com.agb.factorycontrol.management.SyncGroup;
 
 /**
  * Pneumatic pusher sorter equipped with two reed sensors indicating the front and the back limits. 
@@ -10,15 +11,16 @@ import com.agb.factorycontrol.actuators.core.Actuator;
  */
 
 public class Pusher {
-    private final Actuator<Float> actuator;
+    private final Actuator<Float> mPusherActuator;
     
-    public Pusher(String name, Float value) {
-        actuator = new Actuator(name, value);
+    public Pusher(String name, Float value, SyncGroup syncGroup) {
+        mPusherActuator = new Actuator(name, value);
+        syncGroup.add(mPusherActuator);
     }
     public void setPosition(float speed) {
-        actuator.setValue(speed);
+        mPusherActuator.setValue(speed);
     }
     public float getPosition() {
-        return actuator.getValue();
+        return mPusherActuator.getValue();
     }  
 }

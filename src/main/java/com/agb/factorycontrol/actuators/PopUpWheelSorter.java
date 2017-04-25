@@ -1,17 +1,13 @@
 package com.agb.factorycontrol.actuators;
 
 import com.agb.factorycontrol.actuators.core.Actuator;
+import com.agb.factorycontrol.actuators.core.Rotation;
+import com.agb.factorycontrol.management.SyncGroup;
 
 enum PopUpWheelSorterDirection {
     LEFT,
     CENTER,
     RIGHT
-}
-
-enum PopUpWheelSorterRotation {
-    OFF,
-    FORWARD,
-    BACKWARD
 }
 
 public class PopUpWheelSorter {  
@@ -20,18 +16,19 @@ public class PopUpWheelSorter {
     private final Actuator<Boolean>   mLeftActuator;
     private final Actuator<Boolean>   mRightActuator;
     
-    public PopUpWheelSorter(String name) {
+    public PopUpWheelSorter(String name, SyncGroup syncGroup) {
         mForwardActuator = new Actuator<>(name + " Forward", false);
         mBackwardActuator = new Actuator<>(name + " Backward", false);
         mLeftActuator = new Actuator<>(name + " Left", false);
         mRightActuator = new Actuator<>(name + " Right", false);
+        syncGroup.add(mForwardActuator).add(mBackwardActuator).add(mLeftActuator).add(mRightActuator);
     }    
-    public void setRotation(PopUpWheelSorterRotation rotation){    
-        if (rotation == PopUpWheelSorterRotation.FORWARD) {
+    public void setRotation(Rotation rotation){    
+        if (rotation == Rotation.FORWARD) {
            mForwardActuator.setValue(true);
            mBackwardActuator.setValue(false);
         }
-        else if (rotation == PopUpWheelSorterRotation.BACKWARD) {
+        else if (rotation == Rotation.BACKWARD) {
            mForwardActuator.setValue(false);
            mBackwardActuator.setValue(true);
         }

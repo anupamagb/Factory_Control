@@ -22,7 +22,7 @@ public class SorterStation {
             beltConveyor = new BeltConveyor("Belt Conveyor " + id, 0F, syncGroup);
             diffuseSensor = new DiffuseSensor("Diffuse Sensor " + id, syncGroup);
             stopBlade = new StopBlade("Stop Blade " + id, false, syncGroup);
-            remover = new Remover("Remover " + id, false, syncGroup);
+            remover = new Remover("Remover " + id, syncGroup);
         }    
     }
         
